@@ -9,16 +9,17 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
-<link rel="stylesheet" href="modal.css">
+<link rel="stylesheet" href="modal.css?v=123">
 </head>
 <body>
 
 <!-- NAVBAR -->
 <nav class="navbar" id="navbar">
 <div class="container navbar__inner">
+<button class="navbar__action-btn navbar__back-btn" aria-label="Go back"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
 <a href="#" class="navbar__logo">REFLEKT</a>
 <div class="navbar__actions">
-<button class="navbar__search" aria-label="Search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg><span>Search</span></button>
+<button class="navbar__search" aria-label="Search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg><span class="navbar__search-text">Search</span></button>
 <button class="navbar__action-btn" id="theme-toggle" aria-label="Toggle theme"><svg class="toggle-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg><svg class="toggle-moon" style="display:none" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
 <button class="navbar__action-btn" aria-label="Wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
 <button class="navbar__action-btn" aria-label="Account"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></button>
@@ -55,8 +56,24 @@
 <button class="gallery__thumb-scroll" aria-label="Scroll thumbnails"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
 </div>
 <div class="gallery__hero">
+<div class="gallery__hero-scroll">
 <img id="gallery-hero-img" src="images/hero_product.png" alt="Women's Black Graphic Printed Oversized Sweatshirt">
+<img src="images/product_angle_2.png" alt="Full body" class="mobile-only-img">
+<img src="images/product_angle_3.png" alt="Side view" class="mobile-only-img">
+<img src="images/product_angle_4.png" alt="Back view" class="mobile-only-img">
+<img src="images/product_detail.png" alt="Detail" class="mobile-only-img">
+<img src="images/product_flatlay.png" alt="Flat lay" class="mobile-only-img">
+</div>
 <button class="gallery__expand" aria-label="Expand image"><svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></button>
+<button class="product-card__heart gallery__mobile-heart" aria-label="Wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+<div class="gallery__dots">
+<div class="gallery__dot active"></div>
+<div class="gallery__dot"></div>
+<div class="gallery__dot"></div>
+<div class="gallery__dot"></div>
+<div class="gallery__dot"></div>
+<div class="gallery__dot"></div>
+</div>
 </div>
 </div>
 
@@ -262,6 +279,19 @@ This oversized sweatshirt features a bold graphic print with abstract artistic i
 </div>
 </footer>
 
+<div class="sticky-bottom-bar">
+<button class="buy-btn sticky-buy"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><span>Buy on Merchant</span></button>
+<button class="try-on-cta sticky-try-on" id="sticky-try-on-btn">
+<div class="try-on-cta__left">
+<span class="try-on-cta__icon"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z" stroke-linejoin="round"/></svg></span>
+<div class="try-on-cta__text">
+<div class="try-on-cta__title">Try This On</div>
+<div class="try-on-cta__subtitle">See how it looks in real life</div>
+</div>
+</div>
+</button>
+</div>
+
 <script src="script.js"></script>
 
 <!-- TRY-ON MODAL -->
@@ -269,9 +299,16 @@ This oversized sweatshirt features a bold graphic print with abstract artistic i
 <div class="modal">
 
 <!-- Header -->
-<div class="modal__header">
+<div class="modal__header desktop-only">
 <span class="modal__title">Try On</span>
 <button class="modal__close" id="modal-close" aria-label="Close"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+</div>
+
+<!-- Mobile Header (Hidden on Desktop) -->
+<div class="mobile-only modal-mobile-header">
+<button class="mobile-icon-btn" id="mobile-modal-back" aria-label="Back"><svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></button>
+<span class="mobile-header-title">TRY ON</span>
+<button class="mobile-icon-btn" id="mobile-modal-close" aria-label="Close"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
 </div>
 
 <!-- Body -->
@@ -295,7 +332,7 @@ This oversized sweatshirt features a bold graphic print with abstract artistic i
 <div class="modal__right">
 
 <!-- Stepper -->
-<div class="stepper">
+<div class="stepper desktop-only">
 <div class="stepper__step active"><div class="stepper__circle">1</div><span class="stepper__label">Select Yourself</span></div>
 <div class="stepper__line"></div>
 <div class="stepper__step upcoming"><div class="stepper__circle">2</div><span class="stepper__label">Generating</span></div>
@@ -305,11 +342,29 @@ This oversized sweatshirt features a bold graphic print with abstract artistic i
 <div class="stepper__step upcoming"><div class="stepper__circle">4</div><span class="stepper__label">Refine Pose</span></div>
 </div>
 
+<!-- Mobile Step Progress (Hidden on Desktop) -->
+<div class="mobile-only mobile-step-progress" id="mobile-step-progress-1">
+<div class="mobile-step-label">Step 1 of 4</div>
+<div class="mobile-step-title-row">
+  <div class="mobile-step-title">Select Yourself</div>
+  <div class="mobile-step-percent">25%</div>
+</div>
+<div class="mobile-step-bar-track"><div class="mobile-step-bar-fill" style="width: 25%"></div></div>
+</div>
+
 <!-- STEP 1: Select Yourself -->
 <div class="step-panel active" data-step="1">
 <div><div class="step-heading">Try this on you</div>
 <div class="step-subheading">Select a photo or upload a new one</div></div>
-<div class="selector-grid"><div class="selector-card selected" data-photo="0">
+<!-- Mobile Selected Photo Card (Hidden on Desktop) -->
+<div class="mobile-only mobile-photo-card" id="mobile-photo-preview-container" style="display: none;">
+<div class="mobile-photo-preview-label">Selected photo</div>
+<div class="mobile-photo-preview">
+<img src="" alt="Selected Photo" id="mobile-selected-img">
+</div>
+</div>
+
+<div class="selector-grid" id="photo-selector-grid"><div class="selector-card selected" data-photo="0">
 <img src="images/model_face_1.png" alt="Option 1" loading="lazy">
 <div class="selector-card__check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div></div>
 <div class="selector-card" data-photo="1">
@@ -324,24 +379,17 @@ This oversized sweatshirt features a bold graphic print with abstract artistic i
 <div class="selector-card" data-photo="4">
 <img src="images/model_face_5.png" alt="Option 5" loading="lazy">
 <div class="selector-card__check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div></div>
-<div class="selector-card selector-card--more"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg><span>View more</span></div></div>
-<div class="upload-block">
-<div class="upload-block__icon"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
-<div><div class="upload-block__text-title">Upload New Photo</div>
-<div class="upload-block__text-sub">JPG, PNG up to 10MB</div></div>
+<div class="selector-card selector-card--more"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg><span>Upload</span></div></div>
+
+<div class="mobile-guidance-tags">
+  <div class="mobile-guidance-tag">Good lighting</div>
+  <div class="mobile-guidance-tag">Clear face</div>
+  <div class="mobile-guidance-tag">Neutral BG</div>
 </div>
-<div class="guidance-card">
-<div class="guidance-card__icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="4" r="2.5" /><line x1="12" y1="6.5" x2="12" y2="16"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="12" y1="16" x2="8" y2="22"/><line x1="12" y1="16" x2="16" y2="22"/></svg></div>
-<div class="guidance-card__content">
-<div class="guidance-card__title">For best results</div>
-<div class="guidance-card__tips">
-<div class="guidance-card__tip"><span class="guidance-card__tip-check"><svg viewBox="0 0 24 24" fill="#2D9D4E" stroke="none"><circle cx="12" cy="12" r="12"/><polyline points="7 12 10.5 15.5 17 9" stroke="#fff" stroke-width="2.5" fill="none"/></svg></span>Use a clear, front-facing photo</div>
-<div class="guidance-card__tip"><span class="guidance-card__tip-check"><svg viewBox="0 0 24 24" fill="#2D9D4E" stroke="none"><circle cx="12" cy="12" r="12"/><polyline points="7 12 10.5 15.5 17 9" stroke="#fff" stroke-width="2.5" fill="none"/></svg></span>Keep your full upper or full body visible</div>
-<div class="guidance-card__tip"><span class="guidance-card__tip-check"><svg viewBox="0 0 24 24" fill="#2D9D4E" stroke="none"><circle cx="12" cy="12" r="12"/><polyline points="7 12 10.5 15.5 17 9" stroke="#fff" stroke-width="2.5" fill="none"/></svg></span>Ensure good lighting (avoid shadows)</div>
-<div class="guidance-card__tip"><span class="guidance-card__tip-check"><svg viewBox="0 0 24 24" fill="#2D9D4E" stroke="none"><circle cx="12" cy="12" r="12"/><polyline points="7 12 10.5 15.5 17 9" stroke="#fff" stroke-width="2.5" fill="none"/></svg></span>Avoid baggy clothing or obstructions</div>
-</div></div></div>
-<button class="modal-cta" id="tryon-cta-btn"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z" stroke-linejoin="round"/></svg><span>Try This Look</span></button>
-<div class="modal-cta__helper">Select a photo to continue</div>
+
+<div class="sticky-bottom-cta-wrapper">
+<button class="modal-cta modal-cta--pill" id="tryon-cta-btn" disabled style="opacity: 0.4;"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z" stroke-linejoin="round"/></svg><span>Try This Look</span></button>
+</div>
 </div>
 
 <!-- STEP 2: Generating -->
@@ -352,53 +400,26 @@ This oversized sweatshirt features a bold graphic print with abstract artistic i
 <svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z" stroke-linejoin="round"/></svg>
 </div>
 <div class="generating-title">Generating your look...</div>
-<div class="generating-subtitle">This may take a few seconds</div>
-<div class="progress-list">
-<div class="progress-item muted"><div class="progress-item__icon"><svg viewBox="0 0 24 24"><path d="M12 16V8"/><polyline points="8 12 12 8 16 12"/><circle cx="12" cy="12" r="10"/></svg></div><div class="progress-item__label">Uploading your photo</div><div class="progress-item__status"></div></div>
-<div class="progress-item muted"><div class="progress-item__icon"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z" stroke-linejoin="round"/></svg></div><div class="progress-item__label">Analyzing outfit &amp; pose</div><div class="progress-item__status"></div></div>
-<div class="progress-item muted"><div class="progress-item__icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg></div><div class="progress-item__label">Rendering your look</div><div class="progress-item__status"></div></div>
-<div class="progress-item muted"><div class="progress-item__icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div class="progress-item__label">Almost there...</div><div class="progress-item__status"></div></div>
-</div>
+<div class="generating-dynamic-text" id="generating-dynamic-text">Uploading your photo...</div>
 </div>
 </div>
 
 <!-- STEP 3: Result -->
 <div class="step-panel" data-step="3">
-<div class="result-section">
-<div class="result-section__title">Using this photo</div>
-<div class="result-photo-row">
-<div class="result-photo-avatar"><img src="images/model_face_1.png" alt="Your photo"></div>
-<button class="result-change-btn" id="action-change-photo"><svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg><span>Change</span></button>
-</div></div>
-
-<div class="result-section">
-<div class="result-section__title">Actions</div>
-<div class="result-actions">
-<button class="result-action-btn" id="action-try-another"><svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg><span>Try Another Photo</span></button>
-<button class="result-action-btn" id="action-save-look"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span>Save Look</span></button>
-<button class="result-action-btn"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span>Download</span></button>
-</div></div>
-
-<div class="result-section">
-<div class="result-refine-row" id="action-change-pose">
-<div class="result-refine-left">
-<div class="result-refine-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="4" r="2"/><path d="M16 22l-2-6h-4l-2 6"/><path d="M8 10l-3 3"/><path d="M16 10l3 3"/><line x1="12" y1="6" x2="12" y2="16"/></svg></div>
-<div><div class="result-refine-label">Change Pose</div>
-<div class="result-refine-sub">Try different poses to see how it looks</div></div>
-</div>
-<div class="result-refine-chevron"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
-</div></div>
-
-<div class="result-banner">
-<div class="result-banner__icon"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z" stroke-linejoin="round"/></svg></div>
-<div><div class="result-banner__text-title">This is how it looks on you</div>
-<div class="result-banner__text-sub">AI personalized to your look and body</div></div>
-<div class="result-banner__heart"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+  
+<div class="mobile-result-hero">
+  <img src="images/hero_product.png" alt="Generated Look">
 </div>
 
-<div class="modal-cta-row">
-<button class="modal-cta"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span>Save Look</span></button>
-<button class="modal-cta modal-cta--outline" id="result-close-btn">Close</button>
+<div class="mobile-result-actions">
+  <button class="mobile-icon-action"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></button>
+  <button class="mobile-icon-action"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></button>
+  <button class="mobile-icon-action" id="action-save-look"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+</div>
+
+<div class="sticky-bottom-cta-wrapper" style="display: flex; flex-direction: column; gap: 8px;">
+  <button class="modal-cta modal-cta--outline modal-cta--pill" id="action-change-pose"><svg viewBox="0 0 24 24"><circle cx="12" cy="4" r="2"/><path d="M16 22l-2-6h-4l-2 6"/><path d="M8 10l-3 3"/><path d="M16 10l3 3"/><line x1="12" y1="6" x2="12" y2="16"/></svg><span>Change Pose</span></button>
+  <button class="modal-cta modal-cta--pill" id="action-try-another"><svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg><span>Try Another Photo</span></button>
 </div>
 </div>
 
@@ -422,22 +443,12 @@ This oversized sweatshirt features a bold graphic print with abstract artistic i
 <div class="selector-card" data-pose="4">
 <img src="images/pose_ref_5.png" alt="Option 5" loading="lazy">
 <div class="selector-card__check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div></div>
-<div class="selector-card selector-card--more"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg><span>View more</span></div></div>
-<div class="upload-block">
-<div class="upload-block__icon"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
-<div><div class="upload-block__text-title">Upload Your Pose</div>
-<div class="upload-block__text-sub">JPG, PNG up to 10MB</div></div>
+<div class="selector-card selector-card--more"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg><span>Upload</span></div></div>
+<div class="mobile-guidance-tags">
+  <div class="mobile-guidance-tag">Full-body</div>
+  <div class="mobile-guidance-tag">Clear pose</div>
+  <div class="mobile-guidance-tag">No cropped limbs</div>
 </div>
-<div class="guidance-card">
-<div class="guidance-card__icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="4" r="2.5" /><line x1="12" y1="6.5" x2="12" y2="16"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="12" y1="16" x2="8" y2="22"/><line x1="12" y1="16" x2="16" y2="22"/></svg></div>
-<div class="guidance-card__content">
-<div class="guidance-card__title">For best results</div>
-<div class="guidance-card__tips">
-<div class="guidance-card__tip"><span class="guidance-card__tip-check"><svg viewBox="0 0 24 24" fill="#2D9D4E" stroke="none"><circle cx="12" cy="12" r="12"/><polyline points="7 12 10.5 15.5 17 9" stroke="#fff" stroke-width="2.5" fill="none"/></svg></span>Use full-body reference images</div>
-<div class="guidance-card__tip"><span class="guidance-card__tip-check"><svg viewBox="0 0 24 24" fill="#2D9D4E" stroke="none"><circle cx="12" cy="12" r="12"/><polyline points="7 12 10.5 15.5 17 9" stroke="#fff" stroke-width="2.5" fill="none"/></svg></span>Avoid extreme angles</div>
-<div class="guidance-card__tip"><span class="guidance-card__tip-check"><svg viewBox="0 0 24 24" fill="#2D9D4E" stroke="none"><circle cx="12" cy="12" r="12"/><polyline points="7 12 10.5 15.5 17 9" stroke="#fff" stroke-width="2.5" fill="none"/></svg></span>Choose clear, well-lit poses</div>
-<div class="guidance-card__tip"><span class="guidance-card__tip-check"><svg viewBox="0 0 24 24" fill="#2D9D4E" stroke="none"><circle cx="12" cy="12" r="12"/><polyline points="7 12 10.5 15.5 17 9" stroke="#fff" stroke-width="2.5" fill="none"/></svg></span>Avoid cropped limbs</div>
-</div></div></div>
 <button class="modal-cta" id="apply-pose-btn"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z" stroke-linejoin="round"/></svg><span>Apply Pose</span></button>
 <div class="modal-cta__helper">Applying a new pose will update your try-on result</div>
 </div>
@@ -446,7 +457,7 @@ This oversized sweatshirt features a bold graphic print with abstract artistic i
 </div><!-- end body -->
 
 <!-- Footer -->
-<div class="modal__footer">
+<div class="modal__footer desktop-only">
 <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span>Your photos are private and secure. We only use them to generate your try-on.</span>
 </div>
 

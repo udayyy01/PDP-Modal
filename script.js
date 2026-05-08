@@ -122,4 +122,48 @@ document.addEventListener('DOMContentLoaded', () => {
     heroImg.style.transition = 'opacity 0.2s ease';
   }
 
+  // ===== MOBILE NAVBAR SCROLL =====
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      navbar?.classList.add('navbar--scrolled');
+    } else {
+      navbar?.classList.remove('navbar--scrolled');
+    }
+  });
+
+  // ===== MOBILE GALLERY DOTS =====
+  const heroScroll = document.querySelector('.gallery__hero-scroll');
+  const dots = document.querySelectorAll('.gallery__dot');
+  if (heroScroll && dots.length > 0) {
+    heroScroll.addEventListener('scroll', () => {
+      const scrollLeft = heroScroll.scrollLeft;
+      const width = heroScroll.clientWidth;
+      const activeIndex = Math.round(scrollLeft / width);
+      dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === activeIndex);
+      });
+    });
+  }
+
+  // ===== MOBILE ACCORDION AUTO-OPEN =====
+  if (window.innerWidth <= 767) {
+    const firstAccordionItem = document.querySelector('.accordion__item');
+    if (firstAccordionItem) {
+      const body = firstAccordionItem.querySelector('.accordion__body');
+      const content = body.querySelector('.accordion__content');
+      body.style.maxHeight = content.scrollHeight + 'px';
+      firstAccordionItem.classList.add('open');
+    }
+  }
+
+  // ===== STICKY BOTTOM BAR TRY-ON =====
+  const stickyTryOnBtn = document.getElementById('sticky-try-on-btn');
+  // the main modal opening logic is currently in modal.js, but it listens to `#try-on-cta`.
+  // We can just add an event listener here that clicks the main `#try-on-cta` to trigger the same logic.
+  stickyTryOnBtn?.addEventListener('click', () => {
+    const mainTryOnBtn = document.getElementById('try-on-cta');
+    mainTryOnBtn?.click();
+  });
+
 });

@@ -20,8 +20,15 @@ document.addEventListener('DOMContentLoaded', () => {
   let selectedPose = 0;
 
   // ===== OPEN / CLOSE =====
+  const stickyOpenBtn = document.getElementById('sticky-try-on-btn');
   openBtn?.addEventListener('click', () => openModal());
+  stickyOpenBtn?.addEventListener('click', () => openModal());
   closeBtn?.addEventListener('click', () => closeModal());
+  
+  // Mobile Header Controls
+  document.getElementById('mobile-modal-close')?.addEventListener('click', () => closeModal());
+  document.getElementById('mobile-modal-back')?.addEventListener('click', () => closeModal());
+
   overlay?.addEventListener('click', (e) => {
     if (e.target === overlay) closeModal();
   });
@@ -81,18 +88,54 @@ document.addEventListener('DOMContentLoaded', () => {
         circle.textContent = stepNum;
       }
     });
+
+    // Update mobile step progress
+    const mobileLabel = modal.querySelector('.mobile-step-label');
+    const mobileTitle = modal.querySelector('.mobile-step-title');
+    const mobilePercent = modal.querySelector('.mobile-step-percent');
+    const mobileFill = modal.querySelector('.mobile-step-bar-fill');
+    
+    if (mobileLabel && mobileTitle && mobilePercent && mobileFill) {
+      const titles = ["Select Yourself", "Generating", "Result", "Refine Pose"];
+      const percents = ["25%", "50%", "75%", "100%"];
+      
+      mobileLabel.textContent = `Step ${step} of 4`;
+      mobileTitle.textContent = titles[step - 1] || titles[0];
+      mobilePercent.textContent = percents[step - 1] || percents[0];
+      mobileFill.style.width = percents[step - 1] || percents[0];
+    }
   }
 
   // ===== PHOTO SELECTION (Step 1) =====
   const photoCards = modal.querySelectorAll('.selector-card[data-photo]');
+  const mobilePreviewContainer = document.getElementById('mobile-photo-preview-container');
+  const mobileSelectedImg = document.getElementById('mobile-selected-img');
+  
+  function updateMobilePreview(card) {
+    if (mobileSelectedImg && mobilePreviewContainer) {
+      const img = card.querySelector('img');
+      if (img) {
+        mobileSelectedImg.src = img.src;
+        // On mobile we show it, on desktop the CSS hides it
+        mobilePreviewContainer.style.display = 'block'; 
+      }
+    }
+  }
+
   photoCards.forEach((card, i) => {
     card.addEventListener('click', () => {
       photoCards.forEach(c => c.classList.remove('selected'));
       card.classList.add('selected');
       selectedPhoto = i;
+      
+      updateMobilePreview(card);
+
       // Enable CTA
       const cta = modal.querySelector('#tryon-cta-btn');
-      if (cta) cta.removeAttribute('disabled');
+      if (cta) {
+        cta.removeAttribute('disabled');
+        cta.style.opacity = '1';
+      }
     });
   });
 
@@ -121,76 +164,32 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ===== GENERATING SIMULATION =====
-  const progressItems = modal.querySelectorAll('.progress-item');
-
-  function resetGenerating() {
-    progressItems.forEach(item => {
-      const status = item.querySelector('.progress-item__status');
-      status.className = 'progress-item__status';
-      status.innerHTML = '';
-      item.classList.add('muted');
-    });
-  }
-
   function runGenerating() {
-    resetGenerating();
+    const dynamicText = modal.querySelector('#generating-dynamic-text');
+    if (!dynamicText) return;
 
-    const checkSvg = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';
-
-    // Step 1: Uploading (instant complete)
-    setTimeout(() => {
-      setProgressDone(0, checkSvg);
-    }, 600);
+    // Reset
+    dynamicText.textContent = "Uploading your photo...";
 
     // Step 2: Analyzing
     setTimeout(() => {
-      setProgressLoading(1);
-    }, 800);
-
-    setTimeout(() => {
-      setProgressDone(1, checkSvg);
-    }, 2200);
+      dynamicText.textContent = "Analyzing outfit & pose...";
+    }, 1500);
 
     // Step 3: Rendering
     setTimeout(() => {
-      setProgressLoading(2);
-    }, 2400);
-
-    setTimeout(() => {
-      setProgressDone(2, checkSvg);
-    }, 4200);
+      dynamicText.textContent = "Rendering your look...";
+    }, 3500);
 
     // Step 4: Almost there
     setTimeout(() => {
-      setProgressLoading(3);
-    }, 4400);
-
-    setTimeout(() => {
-      setProgressDone(3, checkSvg);
-    }, 5400);
+      dynamicText.textContent = "Almost there...";
+    }, 5000);
 
     // Transition to result
     setTimeout(() => {
       goToStep(3);
-    }, 5800);
-  }
-
-  function setProgressDone(index, checkSvg) {
-    const item = progressItems[index];
-    if (!item) return;
-    item.classList.remove('muted');
-    const status = item.querySelector('.progress-item__status');
-    status.className = 'progress-item__status progress-item__status--done';
-    status.innerHTML = checkSvg;
-  }
-
-  function setProgressLoading(index) {
-    const item = progressItems[index];
-    if (!item) return;
-    item.classList.remove('muted');
-    const status = item.querySelector('.progress-item__status');
-    status.className = 'progress-item__status progress-item__status--loading';
-    status.innerHTML = '';
+    }, 6500);
   }
 
   // ===== STEP 3 ACTIONS =====
@@ -229,6 +228,12 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize first photo as selected
   if (photoCards[0]) {
     photoCards[0].classList.add('selected');
+    updateMobilePreview(photoCards[0]);
+    const cta = modal.querySelector('#tryon-cta-btn');
+    if (cta) {
+      cta.removeAttribute('disabled');
+      cta.style.opacity = '1';
+    }
   }
   if (poseCards[0]) {
     poseCards[0].classList.add('selected');

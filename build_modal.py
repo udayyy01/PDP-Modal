@@ -30,7 +30,7 @@ def selector_cards(items, attr, selected=0):
         h += f'''<div class="selector-card{sel}" {attr}="{i}">
 <img src="{src}" alt="Option {i+1}" loading="lazy">
 <div class="selector-card__check">{CHECK}</div></div>\n'''
-    h += f'''<div class="selector-card selector-card--more">{PLUS}<span>View more</span></div>'''
+    h += f'''<div class="selector-card selector-card--more">{PLUS}<span>Upload</span></div>'''
     return h
 
 modal_html = f'''
@@ -39,9 +39,16 @@ modal_html = f'''
 <div class="modal">
 
 <!-- Header -->
-<div class="modal__header">
+<div class="modal__header desktop-only">
 <span class="modal__title">Try On</span>
 <button class="modal__close" id="modal-close" aria-label="Close">{CLOSE}</button>
+</div>
+
+<!-- Mobile Header (Hidden on Desktop) -->
+<div class="mobile-only modal-mobile-header">
+<button class="mobile-icon-btn" id="mobile-modal-back" aria-label="Back">{ARROW_LEFT}</button>
+<span class="mobile-header-title">TRY ON</span>
+<button class="mobile-icon-btn" id="mobile-modal-close" aria-label="Close">{CLOSE}</button>
 </div>
 
 <!-- Body -->
@@ -65,7 +72,7 @@ modal_html = f'''
 <div class="modal__right">
 
 <!-- Stepper -->
-<div class="stepper">
+<div class="stepper desktop-only">
 <div class="stepper__step active"><div class="stepper__circle">1</div><span class="stepper__label">Select Yourself</span></div>
 <div class="stepper__line"></div>
 <div class="stepper__step upcoming"><div class="stepper__circle">2</div><span class="stepper__label">Generating</span></div>
@@ -75,28 +82,39 @@ modal_html = f'''
 <div class="stepper__step upcoming"><div class="stepper__circle">4</div><span class="stepper__label">Refine Pose</span></div>
 </div>
 
+<!-- Mobile Step Progress (Hidden on Desktop) -->
+<div class="mobile-only mobile-step-progress" id="mobile-step-progress-1">
+<div class="mobile-step-label">Step 1 of 4</div>
+<div class="mobile-step-title-row">
+  <div class="mobile-step-title">Select Yourself</div>
+  <div class="mobile-step-percent">25%</div>
+</div>
+<div class="mobile-step-bar-track"><div class="mobile-step-bar-fill" style="width: 25%"></div></div>
+</div>
+
 <!-- STEP 1: Select Yourself -->
 <div class="step-panel active" data-step="1">
 <div><div class="step-heading">Try this on you</div>
 <div class="step-subheading">Select a photo or upload a new one</div></div>
-<div class="selector-grid">{selector_cards(faces, 'data-photo')}</div>
-<div class="upload-block">
-<div class="upload-block__icon">{UPLOAD}</div>
-<div><div class="upload-block__text-title">Upload New Photo</div>
-<div class="upload-block__text-sub">JPG, PNG up to 10MB</div></div>
+<!-- Mobile Selected Photo Card (Hidden on Desktop) -->
+<div class="mobile-only mobile-photo-card" id="mobile-photo-preview-container" style="display: none;">
+<div class="mobile-photo-preview-label">Selected photo</div>
+<div class="mobile-photo-preview">
+<img src="" alt="Selected Photo" id="mobile-selected-img">
 </div>
-<div class="guidance-card">
-<div class="guidance-card__icon">{BODY}</div>
-<div class="guidance-card__content">
-<div class="guidance-card__title">For best results</div>
-<div class="guidance-card__tips">
-<div class="guidance-card__tip"><span class="guidance-card__tip-check">{GREEN_CHECK}</span>Use a clear, front-facing photo</div>
-<div class="guidance-card__tip"><span class="guidance-card__tip-check">{GREEN_CHECK}</span>Keep your full upper or full body visible</div>
-<div class="guidance-card__tip"><span class="guidance-card__tip-check">{GREEN_CHECK}</span>Ensure good lighting (avoid shadows)</div>
-<div class="guidance-card__tip"><span class="guidance-card__tip-check">{GREEN_CHECK}</span>Avoid baggy clothing or obstructions</div>
-</div></div></div>
-<button class="modal-cta" id="tryon-cta-btn">{SPARKLE}<span>Try This Look</span></button>
-<div class="modal-cta__helper">Select a photo to continue</div>
+</div>
+
+<div class="selector-grid" id="photo-selector-grid">{selector_cards(faces, 'data-photo')}</div>
+
+<div class="mobile-guidance-tags">
+  <div class="mobile-guidance-tag">Good lighting</div>
+  <div class="mobile-guidance-tag">Clear face</div>
+  <div class="mobile-guidance-tag">Neutral BG</div>
+</div>
+
+<div class="sticky-bottom-cta-wrapper">
+<button class="modal-cta modal-cta--pill" id="tryon-cta-btn" disabled style="opacity: 0.4;">{SPARKLE}<span>Try This Look</span></button>
+</div>
 </div>
 
 <!-- STEP 2: Generating -->
@@ -107,53 +125,26 @@ modal_html = f'''
 {SPARKLE}
 </div>
 <div class="generating-title">Generating your look...</div>
-<div class="generating-subtitle">This may take a few seconds</div>
-<div class="progress-list">
-<div class="progress-item muted"><div class="progress-item__icon">{CLOUD_UP}</div><div class="progress-item__label">Uploading your photo</div><div class="progress-item__status"></div></div>
-<div class="progress-item muted"><div class="progress-item__icon">{SPARKLE}</div><div class="progress-item__label">Analyzing outfit &amp; pose</div><div class="progress-item__status"></div></div>
-<div class="progress-item muted"><div class="progress-item__icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg></div><div class="progress-item__label">Rendering your look</div><div class="progress-item__status"></div></div>
-<div class="progress-item muted"><div class="progress-item__icon">{CLOCK}</div><div class="progress-item__label">Almost there...</div><div class="progress-item__status"></div></div>
-</div>
+<div class="generating-dynamic-text" id="generating-dynamic-text">Uploading your photo...</div>
 </div>
 </div>
 
 <!-- STEP 3: Result -->
 <div class="step-panel" data-step="3">
-<div class="result-section">
-<div class="result-section__title">Using this photo</div>
-<div class="result-photo-row">
-<div class="result-photo-avatar"><img src="images/model_face_1.png" alt="Your photo"></div>
-<button class="result-change-btn" id="action-change-photo">{EDIT}<span>Change</span></button>
-</div></div>
-
-<div class="result-section">
-<div class="result-section__title">Actions</div>
-<div class="result-actions">
-<button class="result-action-btn" id="action-try-another">{REFRESH}<span>Try Another Photo</span></button>
-<button class="result-action-btn" id="action-save-look">{HEART}<span>Save Look</span></button>
-<button class="result-action-btn">{DOWNLOAD}<span>Download</span></button>
-</div></div>
-
-<div class="result-section">
-<div class="result-refine-row" id="action-change-pose">
-<div class="result-refine-left">
-<div class="result-refine-icon">{POSE}</div>
-<div><div class="result-refine-label">Change Pose</div>
-<div class="result-refine-sub">Try different poses to see how it looks</div></div>
-</div>
-<div class="result-refine-chevron">{CHEV_RIGHT}</div>
-</div></div>
-
-<div class="result-banner">
-<div class="result-banner__icon">{SPARKLE}</div>
-<div><div class="result-banner__text-title">This is how it looks on you</div>
-<div class="result-banner__text-sub">AI personalized to your look and body</div></div>
-<div class="result-banner__heart">{HEART}</div>
+  
+<div class="mobile-result-hero">
+  <img src="images/hero_product.png" alt="Generated Look">
 </div>
 
-<div class="modal-cta-row">
-<button class="modal-cta">{HEART}<span>Save Look</span></button>
-<button class="modal-cta modal-cta--outline" id="result-close-btn">Close</button>
+<div class="mobile-result-actions">
+  <button class="mobile-icon-action">{DOWNLOAD}</button>
+  <button class="mobile-icon-action">{UPLOAD}</button>
+  <button class="mobile-icon-action" id="action-save-look">{HEART}</button>
+</div>
+
+<div class="sticky-bottom-cta-wrapper" style="display: flex; flex-direction: column; gap: 8px;">
+  <button class="modal-cta modal-cta--outline modal-cta--pill" id="action-change-pose">{POSE}<span>Change Pose</span></button>
+  <button class="modal-cta modal-cta--pill" id="action-try-another">{REFRESH}<span>Try Another Photo</span></button>
 </div>
 </div>
 
@@ -163,21 +154,11 @@ modal_html = f'''
 <div><div class="step-heading">Refine your pose</div>
 <div class="step-subheading">Select a pose or upload your own</div></div>
 <div class="selector-grid">{selector_cards(poses, 'data-pose')}</div>
-<div class="upload-block">
-<div class="upload-block__icon">{UPLOAD}</div>
-<div><div class="upload-block__text-title">Upload Your Pose</div>
-<div class="upload-block__text-sub">JPG, PNG up to 10MB</div></div>
+<div class="mobile-guidance-tags">
+  <div class="mobile-guidance-tag">Full-body</div>
+  <div class="mobile-guidance-tag">Clear pose</div>
+  <div class="mobile-guidance-tag">No cropped limbs</div>
 </div>
-<div class="guidance-card">
-<div class="guidance-card__icon">{BODY}</div>
-<div class="guidance-card__content">
-<div class="guidance-card__title">For best results</div>
-<div class="guidance-card__tips">
-<div class="guidance-card__tip"><span class="guidance-card__tip-check">{GREEN_CHECK}</span>Use full-body reference images</div>
-<div class="guidance-card__tip"><span class="guidance-card__tip-check">{GREEN_CHECK}</span>Avoid extreme angles</div>
-<div class="guidance-card__tip"><span class="guidance-card__tip-check">{GREEN_CHECK}</span>Choose clear, well-lit poses</div>
-<div class="guidance-card__tip"><span class="guidance-card__tip-check">{GREEN_CHECK}</span>Avoid cropped limbs</div>
-</div></div></div>
 <button class="modal-cta" id="apply-pose-btn">{SPARKLE}<span>Apply Pose</span></button>
 <div class="modal-cta__helper">Applying a new pose will update your try-on result</div>
 </div>
@@ -186,7 +167,7 @@ modal_html = f'''
 </div><!-- end body -->
 
 <!-- Footer -->
-<div class="modal__footer">
+<div class="modal__footer desktop-only">
 {LOCK}<span>Your photos are private and secure. We only use them to generate your try-on.</span>
 </div>
 

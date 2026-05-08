@@ -88,9 +88,10 @@ html = f'''<!DOCTYPE html>
 <!-- NAVBAR -->
 <nav class="navbar" id="navbar">
 <div class="container navbar__inner">
+<button class="navbar__action-btn navbar__back-btn" aria-label="Go back">{CHEV_LEFT}</button>
 <a href="#" class="navbar__logo">REFLEKT</a>
 <div class="navbar__actions">
-<button class="navbar__search" aria-label="Search">{SEARCH}<span>Search</span></button>
+<button class="navbar__search" aria-label="Search">{SEARCH}<span class="navbar__search-text">Search</span></button>
 <button class="navbar__action-btn" id="theme-toggle" aria-label="Toggle theme">{SUN}{MOON}</button>
 <button class="navbar__action-btn" aria-label="Wishlist">{HEART}</button>
 <button class="navbar__action-btn" aria-label="Account">{USER}</button>
@@ -121,8 +122,24 @@ html = f'''<!DOCTYPE html>
 <button class="gallery__thumb-scroll" aria-label="Scroll thumbnails">{CHEV_DOWN}</button>
 </div>
 <div class="gallery__hero">
+<div class="gallery__hero-scroll">
 <img id="gallery-hero-img" src="images/hero_product.png" alt="Women's Black Graphic Printed Oversized Sweatshirt">
+<img src="images/product_angle_2.png" alt="Full body" class="mobile-only-img">
+<img src="images/product_angle_3.png" alt="Side view" class="mobile-only-img">
+<img src="images/product_angle_4.png" alt="Back view" class="mobile-only-img">
+<img src="images/product_detail.png" alt="Detail" class="mobile-only-img">
+<img src="images/product_flatlay.png" alt="Flat lay" class="mobile-only-img">
+</div>
 <button class="gallery__expand" aria-label="Expand image">{EXPAND}</button>
+<button class="product-card__heart gallery__mobile-heart" aria-label="Wishlist">{HEART}</button>
+<div class="gallery__dots">
+<div class="gallery__dot active"></div>
+<div class="gallery__dot"></div>
+<div class="gallery__dot"></div>
+<div class="gallery__dot"></div>
+<div class="gallery__dot"></div>
+<div class="gallery__dot"></div>
+</div>
 </div>
 </div>
 
@@ -277,6 +294,19 @@ This oversized sweatshirt features a bold graphic print with abstract artistic i
 </div>
 </div>
 </footer>
+
+<div class="sticky-bottom-bar">
+<button class="buy-btn sticky-buy">{CART}<span>Buy on Merchant</span></button>
+<button class="try-on-cta sticky-try-on" id="sticky-try-on-btn">
+<div class="try-on-cta__left">
+<span class="try-on-cta__icon">{SPARKLE}</span>
+<div class="try-on-cta__text">
+<div class="try-on-cta__title">Try This On</div>
+<div class="try-on-cta__subtitle">See how it looks in real life</div>
+</div>
+</div>
+</button>
+</div>
 
 <script src="script.js"></script>
 </body>
